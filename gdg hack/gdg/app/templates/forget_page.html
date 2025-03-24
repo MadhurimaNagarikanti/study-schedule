@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fcf4ec;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input, select {
+            width: 95%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #ff9f97;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ff7b73;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+        }
+        .success-message {
+            color: green;
+            font-size: 14px;
+        }
+        #passwordFields {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Forgot Password</h2>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{% if message.tags == 'error' %}error-message{% else %}success-message{% endif %}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            {% if not show_password_fields %}
+                <!-- Email and Security Question Fields -->
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <select name="hint_selection" required>
+                    <option value="" disabled selected>Select your security question</option>
+                    <option value="pet">What is your pet's name?</option>
+                    <option value="teacher">What is your favorite teacher's name?</option>
+                    <option value="place">What is your favorite place?</option>
+                </select>
+                <input type="text" name="hint_answer" placeholder="Enter your answer" required>
+                <button type="submit" name="verify" id="verifyButton">Verify</button>
+
+            {% else %}
+                <!-- Password Fields after Verification -->
+                <div id="passwordFields">
+                    <input type="password" id="new_password" name="new_password" placeholder="New Password" required>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                </div>
+                <button type="submit" name="reset_password" id="resetButton" onclick="return validatePasswords()">Reset Password</button>
+            {% endif %}
+        </form>
+    </div>
+
+    <script>
+        function validatePasswords() {
+            let newPassword = document.getElementById("new_password").value;
+            let confirmPassword = document.getElementById("confirm_password").value;
+            
+            if (newPassword !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            }
+            return true;
+        }
+
+        window.onload = function () {
+            {% if show_password_fields %}
+                document.getElementById("passwordFields").style.display = "block";
+                document.getElementById("verifyButton").style.display = "none";
+            {% endif %}
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Study Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fcf4ec;
+            margin: 0;
+            position: relative;
+        }
+
+        .header {
+            background-color: #ff9f97;
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sidebar {
+            width: 220px;
+            height: 100%;
+            background-color: #ff9f97;
+            position: fixed;
+            top: 0;
+            left: -220px;
+            transition: 0.3s;
+            z-index: 1000;
+            padding-top: 40px;
+        }
+
+        .sidebar .menu-icon {
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            color: white;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: #ff8078;
+        }
+
+        .profile-container {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .profile-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .profile-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 130px;
+            display: none;
+            text-align: left;
+            z-index: 1000;
+        }
+
+        .profile-menu a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+        }
+
+        .profile-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .profile-menu.active {
+            display: block;
+        }
+
+        .calendar-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            margin-bottom: 15px;
+        }
+
+        select, button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #ff9f97;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff8078;
+        }
+
+        .month-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .day, .header-cell {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+
+        .header-cell {
+            font-weight: bold;
+            color: #444;
+            background-color: #f5f5f5;
+        }
+
+        .day:hover {
+            background: #f0f0f0;
+        }
+
+        .current-day {
+            background: #ff9f97;
+            color: white;
+            font-weight: bold;
+        }
+
+        .add-work-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff9f97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .add-work-btn:hover {
+            background-color: #ff8078;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <span class="menu-icon" onclick="toggleSidebar()">&#9776;</span>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'profile' %}">Profile</a>
+
+        <a href="dashboard.html">Dashboard</a>
+        <a href="{% url 'settings' %}">Settings</a>
+        <a href="{% url 'help' %}">Help</a>
+    </div>
+
+    <div class="header">
+        <span class="menu-icon" id="menuIcon" onclick="toggleSidebar()">&#9776;</span>
+        <span>Smart Study Planner</span>
+        <div class="profile-container">
+            <img src="https://cdn.vectorstock.com/i/500p/03/05/account-icon-simple-vector-55380305.jpg" 
+                alt="Profile" class="profile-icon" onclick="toggleProfileMenu()">
+            <div class="profile-menu" id="profileMenu">
+                <a href="profile.html">View Profile</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calendar-container">
+        <div class="controls">
+            <select id="monthSelect"></select>
+            <select id="yearSelect"></select>
+            <button onclick="updateCalendar()">Go</button>
+        </div>
+        <h2 class="month-title" id="monthTitle"></h2>
+        <div class="calendar" id="calendar"></div>
+
+        <a href="{% url 'create_task' %}" class="add-work-btn">+ Add Work</a>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
+        }
+
+        function toggleProfileMenu() {
+            let menu = document.getElementById("profileMenu");
+            menu.classList.toggle("active");
+        }
+
+        // Close profile menu when clicking elsewhere
+        document.addEventListener('click', function(event) {
+            let profileMenu = document.getElementById('profileMenu');
+            let profileIcon = document.querySelector('.profile-icon');
+            
+            if (!profileMenu.contains(event.target) && !profileIcon.contains(event.target)) {
+                profileMenu.classList.remove('active');
+            }
+        });
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", 
+                          "July", "August", "September", "October", "November", "December"];
+        const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        let currentDate = new Date();
+        let currentYear = currentDate.getFullYear();
+        let currentMonth = currentDate.getMonth();
+
+        function populateSelectors() {
+            const monthSelect = document.getElementById("monthSelect");
+            const yearSelect = document.getElementById("yearSelect");
+
+            // Clear existing options
+            monthSelect.innerHTML = '';
+            yearSelect.innerHTML = '';
+
+            // Add month options
+            monthNames.forEach((month, index) => {
+                let option = document.createElement("option");
+                option.value = index;
+                option.textContent = month;
+                if (index === currentMonth) option.selected = true;
+                monthSelect.appendChild(option);
+            });
+
+            // Add year options (5 years before and after current year)
+            for (let i = currentYear - 5; i <= currentYear + 5; i++) {
+                let option = document.createElement("option");
+                option.value = i;
+                option.textContent = i;
+                if (i === currentYear) option.selected = true;
+                yearSelect.appendChild(option);
+            }
+        }
+
+        function generateCalendar(year, month) {
+            const calendarDiv = document.getElementById("calendar");
+            const monthTitle = document.getElementById("monthTitle");
+            
+            // Clear previous calendar
+            calendarDiv.innerHTML = "";
+            
+            // Set month title
+            monthTitle.textContent = `${monthNames[month]} ${year}`;
+
+            // Add day headers
+            dayNames.forEach(day => {
+                let headerCell = document.createElement("div");
+                headerCell.classList.add("header-cell");
+                headerCell.textContent = day;
+                calendarDiv.appendChild(headerCell);
+            });
+
+            // Get first day of month and days in month
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            // Add empty cells for days before the first day of month
+            for (let i = 0; i < firstDay; i++) {
+                calendarDiv.appendChild(document.createElement("div"));
+            }
+
+            // Add days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                let dayDiv = document.createElement("div");
+                dayDiv.classList.add("day");
+                dayDiv.textContent = day;
+                
+                // Highlight current day
+                if (day === currentDate.getDate() && 
+                    month === currentDate.getMonth() && 
+                    year === currentDate.getFullYear()) {
+                    dayDiv.classList.add("current-day");
+                }
+                
+                calendarDiv.appendChild(dayDiv);
+            }
+        }
+
+        function updateCalendar() {
+            const monthSelect = document.getElementById("monthSelect");
+            const yearSelect = document.getElementById("yearSelect");
+            const selectedMonth = parseInt(monthSelect.value);
+            const selectedYear = parseInt(yearSelect.value);
+            
+            generateCalendar(selectedYear, selectedMonth);
+        }
+
+        // Initialize the calendar when the page loads
+        window.onload = function() {
+            populateSelectors();
+            generateCalendar(currentYear, currentMonth);
+        };
+    </script>
+</body>
+</html>

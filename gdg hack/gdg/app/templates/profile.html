@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Smart Study Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fcf4ec;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            background: #ff9f97;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar {
+            width: 220px;
+            height: 100%;
+            background-color: #ff9f97;
+            position: fixed;
+            top: 50px;
+            left: 0;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 0.3s ease-in-out;
+            padding-left: 10px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            text-align: left;
+            transition: 0.2s;
+            margin-bottom: 15px; /* Increased space between labels */
+        }
+
+        .sidebar a:hover {
+            background-color: #ff8078;
+        }
+
+        .menu-button {
+            position: fixed;
+            top: 12px;
+            left: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            z-index: 1000;
+        }
+
+        .profile-card {
+            display: flex;
+            width: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-left: 240px;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .profile-sidebar {
+            width: 200px;
+            background: linear-gradient(to bottom, #ff7e5f, #ff9f97);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: url('https://cdn.vectorstock.com/i/500p/03/05/account-icon-simple-vector-55380305.jpg') no-repeat center/cover;
+            border: 3px solid white;
+            margin-top: 20px;
+        }
+
+        .profile-sidebar h3 {
+            margin: 15px 0 5px;
+        }
+
+        .profile-sidebar p {
+            margin: 5px 0 10px;
+        }
+
+        .profile-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            font-size: 20px;
+            color: #555;
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.querySelector(".sidebar");
+            sidebar.style.transform = (sidebar.style.transform === "translateX(-100%)") ? "translateX(0)" : "translateX(-100%)";
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        Profile - Smart Study Planner
+    </div>
+
+    <button class="menu-button" onclick="toggleSidebar()">☰</button>
+
+    <div class="sidebar">
+        <a href="index.html">Home</a>
+        <a href="profile.html">My Profile</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="settings.html">Settings</a>
+        <a href="help.html">Help</a>
+    </div>
+    
+    <div class="profile-card">
+        <div class="profile-sidebar">
+            <div class="profile-pic"></div>
+            <h3>vanitha</h3>
+            <p>Student</p>
+        </div>
+        <div class="profile-content">
+            <h3>Information</h3>
+            <div class="info-row">
+                <strong>Email</strong>
+                <span>k@gmail.com</span>
+            </div>
+            <div class="info-row">
+                <strong>Phone</strong>
+                <span>9897998989</span>
+            </div>
+            <h3>Projects</h3>
+            <div class="info-row">
+                <strong>Recent</strong>
+                <span>Mdhu</span>
+            </div>
+            <div class="info-row">
+                <strong>Most Viewed</strong>
+                <span>Dinoter Husaim</span>
+            </div>
+            <div class="social-icons">
+                <a href="Whatsapp">&#xf09a;</a>
+                <a href="Mail">&#xf099;</a>
+                <a href="Facebook">&#xf16d;</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

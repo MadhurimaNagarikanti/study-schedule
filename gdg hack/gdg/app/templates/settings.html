@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Page</title>
+    <style>
+        /* Same CSS from your provided code */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #FCF4EC;
+            padding: 20px;
+            color: #333;
+        }
+
+        .settings-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #FFCFCB;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+
+        .settings-section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1.5px solid #FF9F97;
+            border-radius: 8px;
+            background-color: #FFF;
+            font-size: 16px;
+            color: #333;
+        }
+
+        select:focus {
+            border: 2px solid #FF9F97;
+            outline: none;
+        }
+
+        .radio-group {
+            margin-top: 10px;
+            display: flex;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+
+        input[type="radio"] {
+            margin-right: 8px;
+            accent-color: #1E90FF;
+            cursor: pointer;
+        }
+
+        .save-button {
+            padding: 10px 30px;
+            background-color: #FF9F97;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .save-button:hover {
+            background-color: #FF7D78;
+        }
+
+        .saved {
+            background-color: #1E90FF !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="settings-container">
+        <h2>Settings</h2>
+
+        <!-- Preferred Language -->
+        <div class="settings-section">
+            <label for="language">Preferred Language</label>
+            <select id="language">
+                <option>English</option>
+                <option>French</option>
+                <option>Spanish</option>
+                <option>German</option>
+                <option>Japanese</option>
+            </select>
+        </div>
+
+        <!-- Time Zone -->
+        <div class="settings-section">
+            <label for="timezone">Time Zone</label>
+            <select id="timezone">
+                <option>UTC - Coordinated Universal Time</option>
+                <option>PST - Pacific Standard Time</option>
+                <option>EST - Eastern Standard Time</option>
+                <option>IST - Indian Standard Time</option>
+            </select>
+        </div>
+
+        <!-- Date & Time Format -->
+        <div class="settings-section">
+            <label>Date & Time Format</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="time-format" value="12-hour" checked> 12-hour
+                </label>
+                <label>
+                    <input type="radio" name="time-format" value="24-hour"> 24-hour
+                </label>
+            </div>
+        </div>
+
+        <!-- Theme Mode -->
+        <div class="settings-section">
+            <label>Theme Mode</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="theme-mode" value="light" checked> Light Mode
+                </label>
+                <label>
+                    <input type="radio" name="theme-mode" value="dark"> Dark Mode
+                </label>
+            </div>
+        </div>
+
+        <!-- Save Button -->
+        <button class="save-button" onclick="saveSettings()">Save</button>
+    </div>
+
+    <script>
+        function saveSettings() {
+            const saveButton = document.querySelector('.save-button');
+            saveButton.innerText = 'Saved';
+            saveButton.classList.add('saved');
+
+            // Reset to 'Save' after 3 seconds
+            setTimeout(() => {
+                saveButton.innerText = 'Save';
+                saveButton.classList.remove('saved');
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>

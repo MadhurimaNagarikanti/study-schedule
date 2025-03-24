@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Smart Study Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fcf4ec;
+            margin: 0;
+            position: relative;
+        }
+
+        .header {
+            background-color: #ff9f97;
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .menu-icon {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .sidebar {
+            width: 220px;
+            height: 100%;
+            background-color: #ff9f97;
+            position: fixed;
+            top: 0;
+            left: -220px;
+            transition: 0.3s;
+            z-index: 1000;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sidebar .menu-icon {
+            position: relative;
+            left: 15px;
+            top: 10px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 20px; /* Space between the icon and menu items */
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            text-align: left;
+            transition: 0.2s;
+            margin-bottom: 10px; /* Space between menu items */
+        }
+
+        .sidebar a:hover {
+            background-color: #ff8078;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        h2 {
+            color: #ff6f61;
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+        Smart Study Planner
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="menu-icon" onclick="toggleSidebar()">☰</div> 
+        <a href="Home.html">Home</a>
+        <a href="profile.html">My Profile</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="settings.html">Settings</a>
+        <a href="Help.html">Help</a>
+    </div>
+
+    <div class="content">
+        <h2>Welcome to Smart Study Planner</h2>
+        <p>
+            <b>Smart Study Planner</b> is a personalized AI-powered study management tool designed to help students organize their tasks efficiently.
+        </p>
+
+        <h2>Key Features</h2>
+        <ul>
+            <li><strong>Smart Scheduling:</strong> Generates personalized study plans based on deadlines and subject difficulty.</li>
+            <li><strong>Task Management:</strong> Add, edit, and track study tasks effortlessly.</li>
+            <li><strong>Interactive Calendar:</strong> View upcoming tasks and deadlines in a structured manner.</li>
+            <li><strong>Reminders and Notifications:</strong> Stay on top of your study schedule with reminders.</li>
+        </ul>
+
+        <h2>How to Use</h2>
+        <ul>
+            <li><strong>Navigate:</strong> Use the sidebar to switch between Home, Profile, Dashboard, Settings, and Help.</li>
+            <li><strong>Add Work:</strong> Click on the “+ Add Work” button in the calendar to add a new study task.</li>
+            <li><strong>View Schedule:</strong> Check the calendar for upcoming deadlines and study sessions.</li>
+            <li><strong>Customize:</strong> Modify your study plan based on subject priority and deadlines.</li>
+        </ul>

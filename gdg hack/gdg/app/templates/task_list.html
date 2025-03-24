@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Schedule</title>
+</head>
+<body>
+    <h1>Generated Study Schedule</h1>
+    
+    {% if schedule %}
+        <table border="1">
+            <tr>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Hours</th>
+            </tr>
+            {% for task in schedule %}
+            <tr>
+                <td>{{ task.date }}</td>
+                <td>{{ task.subject }}</td>
+                <td>{{ task.hours }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No tasks scheduled.</p>
+    {% endif %}
+</body>
+</html>

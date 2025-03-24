@@ -1,0 +1,134 @@
+ {% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Study Planner</title>
+    <style>
+        /* General Reset and Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Bradley Hand,cursive;  /* Informal, friendly font */
+    background-color: #FFF5F3;  /* Light Peach Background */
+    color: #2E2A28;  /* Dark Grayish Brown for text */
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;  /* Increased padding to make navbar slightly larger */
+    background-color: #FF9F97;  /* Warm peach tone */
+}
+.navbar .logo {
+    color: white;
+    font-size: 2rem;  /* Larger, more prominent logo */
+    font-weight: bold;
+}
+.navbar nav {
+    display: flex;
+    gap: 20px;  /* Slightly larger gap for better spacing */
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;  /* Slightly larger button text */
+    transition: background-color 0.3s ease;
+}
+.login-btn {
+    background-color: #FF897D;  
+    color: white;
+}
+.signup-btn {
+    background-color: #FFCFCB;  
+    color: white;
+}
+.login-btn:hover, .signup-btn:hover {
+    background-color: #FF705E;  
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 0 10%;
+    background-color: #FFF9F7;
+}
+.hero-content {
+    flex: 1;
+    max-width: 500px;
+}
+.hero-content h1 {
+    font-size: 3rem;  /* Larger size for main heading */
+    margin-bottom: 15px;
+    color: #2E2A28;  
+}
+.hero-content p {
+    font-size: 1.2rem;  /* Slightly larger for better readability */
+    margin-bottom: 20px;
+}
+.get-started-btn {
+    background-color: #FF705E;  
+    color: white;
+    font-size: 1rem;
+}
+.get-started-btn:hover {
+    background-color: #FF5744;  
+}
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+.image-placeholder {
+    width: 80%;
+    border-radius: 20px;
+    background-color: #FFCFCB;  
+}
+
+/* Footer */
+.footer {
+    background-color: #FF9F97;  
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Smart Study Planner</div>
+        <nav>
+            <a href="{% url 'login' %}"><button class="btn login-btn">Login</button></a>
+            <a href="{% url 'signup' %}"><button class="btn signup-btn">SignUp</button></a>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Smart Study Planner</h1>
+            <p>Organize your studies, manage your time, and reach your goals effectively with our AI-powered planner.</p>
+            <a href="{% url 'login' %}"><button class="btn login-btn">Get Started</button></a>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'sp_image.jpg' %}" alt="My Image" width='500px' height='350px'>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Smart Study Planner. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
